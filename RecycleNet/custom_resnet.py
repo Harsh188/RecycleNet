@@ -8,9 +8,9 @@ import config
 import tensorflow as tf
 import tensorflow_addons as tfa
 from tensorflow import keras
-from keras.models import Model
-from keras.layers import Dense, Input, Activation, Flatten, Dropout, GlobalAveragePooling2D
-from keras.regularizers import l2
+from tensorflow.keras.models import Model
+from tensorflow.keras.layers import Dense, Input, Activation, Flatten, Dropout, GlobalAveragePooling2D
+from tensorflow.keras.regularizers import l2
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 
@@ -18,6 +18,10 @@ nb_classes = 5
 image_input = Input(shape=(224, 224, 3))
 
 timestr = time.strftime("%Y-%m-%d_%H:%M:%S")
+
+physical_devices = tf.config.experimental.list_physical_devices('GPU')
+assert len(physical_devices) > 0, "Not enough GPU hardware devices available"
+configuration = tf.config.experimental.set_memory_growth(physical_devices[0], True)
 
 def train_model():
     model = ResNet50(weights='imagenet',include_top=False)

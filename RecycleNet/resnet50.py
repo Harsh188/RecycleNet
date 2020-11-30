@@ -16,7 +16,7 @@ from tensorflow.keras.layers import ZeroPadding2D
 from tensorflow.keras.layers import AveragePooling2D
 from tensorflow.keras.layers import GlobalAveragePooling2D
 from tensorflow.keras.layers import BatchNormalization
-from keras.models import Model
+from tensorflow.keras.models import Model
 from keras.preprocessing import image
 import keras.backend as K
 from keras.utils import layer_utils
