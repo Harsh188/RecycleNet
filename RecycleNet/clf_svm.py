@@ -57,7 +57,7 @@ def plot_cf(y_pred, y_test):
 def train_svm():
     print(FILE_NAME)
     svm_features, svm_labels = extract_features(config.TRAIN_DIR,config.sample_count)
-    X = svm_features.reshape(config.sample_count, 7*7*2048)
+    X = svm_features.reshape(config.sample_count, config.OUTPUT_SIZE)
     y = svm_labels
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -80,7 +80,7 @@ def train_svm():
 def grid_search():
     print(FILE_NAME)
     svm_features, svm_labels = extract_features(config.TRAIN_DIR,config.sample_count)
-    X = svm_features.reshape(config.sample_count, 7*7*2048)
+    X = svm_features.reshape(config.sample_count, config.OUTPUT_SIZE)
     y = svm_labels
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)

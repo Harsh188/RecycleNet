@@ -24,14 +24,14 @@ assert len(physical_devices) > 0, "Not enough GPU hardware devices available"
 configuration = tf.config.experimental.set_memory_growth(physical_devices[0], True)
 
 def train_model():
-    model = ResNet50(weights='imagenet',include_top=False)
+    model = ResNet50(weights='imagenet',pooling="avg",include_top=False)
     last_layer = model.output
-    x = GlobalAveragePooling2D()(last_layer)
-    x = Dense(512, activation='relu',name='fc-1')(x)
-    x = Dropout(0.5)(x)
-    x = Dense(256, activation='relu',name='fc-2')(x)
-    x = Dropout(0.5)(x)
-    out = Dense(nb_classes, activation='softmax',name='output_layer')(x)
+    # x = GlobalAveragePooling2D()(last_layer)
+    x = Flatten()(last_layer)
+    x = Dense(2048, activation='relu', name='fc2048')(x)
+    x = Dense(512, activation='relu')(x)
+    x = Dense(64, activation='relu')(x)
+    out = Dense(nb_classes, activation='softmax', name='fc1000')(x)
     custom_resnet_model = Model(inputs=model.input, outputs=out)
 
     custom_resnet_model.summary()
@@ -78,7 +78,7 @@ def train_model():
 
 def get_model():
     model = keras.models.load_model(config.TRAINED_MODEL_DIR_RESNET)
-    layer_name = 'res5c_branch2c'
+    layer_name = 'dense'
     custom_resnet_model = Model(inputs=model.input, outputs=model.get_layer(layer_name).output)
     custom_resnet_model.summary()
     return custom_resnet_model

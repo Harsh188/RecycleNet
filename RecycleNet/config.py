@@ -9,7 +9,7 @@ LOGS_DIR = PACKAGE_ROOT + "logs"
 
 GRAPHDIR_CM = "./imgs/graphs/confusion_matrix/"
 
-PREDICT_DIR = "./imgs"
+PREDICT_DIR = "./imgs/"
 
 """
 Hyper-parameters for Resnet50
@@ -18,6 +18,7 @@ EPOCHS = 12
 STEPS_PER_EPOCH = 30
 BATCH_SIZE = 32
 
+OUTPUT_SIZE = 512
 """
 Hyper-parameters for SVM
 """

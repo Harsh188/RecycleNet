@@ -5,8 +5,8 @@ from keras.preprocessing import image
 from keras.applications.imagenet_utils import preprocess_input
 import pickle
 
-img_path = config.PREDICT_DIR + "1.jpg"
-svm_path = None
+img_path = config.PREDICT_DIR + "cardboard.jpg"
+svm_path = 'resnet_svm_2020-12-01-22:40.sav'
 
 
 def test_predict():
@@ -18,10 +18,11 @@ def test_predict():
     x = preprocess_input(x)
 
     features = model.predict(x)
+    # features = features.reshape(1,7*7*2048)
 
     clf_svm = pickle.load(open(svm_path, 'rb'))
 
-    y_pred = clf_svm.predict(features)
+    y_pred = clf_svm.score(features,[0])
 
     print(y_pred)
 

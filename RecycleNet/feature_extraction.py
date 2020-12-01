@@ -19,7 +19,7 @@ datagen = ImageDataGenerator(rescale=1./255,
                              fill_mode='nearest')
 
 def extract_features(directory, sample_count):
-    features = np.zeros(shape=(sample_count,7,7,2048))
+    features = np.zeros(shape=(sample_count,config.OUTPUT_SIZE))
     labels = np.zeros(shape=(sample_count))
     
     generator = datagen.flow_from_directory(directory,
